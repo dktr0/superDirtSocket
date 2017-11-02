@@ -1,0 +1,10 @@
+{
+    "name": "superDirtSocket",
+    "version": "0.0.1",
+    "dependencies": {
+	"express": "*",
+	"ws": "*",
+	"osc": "*",
+	"nopt": "*"
+    }
+}
