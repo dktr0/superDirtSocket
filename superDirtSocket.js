@@ -50,13 +50,18 @@ udp.open();
 var server = http.createServer();
 var wss = new WebSocket.Server({server: server});
 wss.on('connection',function(ws) {
-  var ip = ws.upgradeReq.connection.remoteAddress;
-  console.log("new WebSocket connection " + ip);
+  // var ip = ws.upgradeReq.connection.remoteAddress; // seems to fail, not sure why but not important since main use is local
+  console.log("new WebSocket connection "); //  + ip);
   ws.on("message",function(m) {
     var n = JSON.parse(m);
-    if(n.request == "play") {
-      udp.send( { address: "/play", args: [] },dirtAddress,dirtPort);
-    }
+    console.log(n);
+    var args = [
+      { type: "s", value: "cps" } , { type: "f", value: 1 },
+      { type: "s", value: "delta" } , { type: "f", value: 1 }, // ???
+      { type: "s", value: "cycle" } , { type: "f", value: 1 }, // ???
+      { type: "s", value: "s" } , { type: "s", value: n.sample_name }
+    ];
+    udp.send( { address: "/play2", args: args },dirtAddress,dirtPort);
   });
 });
 
