@@ -24,3 +24,6 @@ cd ~/superDirtSocket
 node superDirtSocket.js
 ```
 
+5. Finally, launch SuperDirt, open a browser and connect to a running Estuary deployment somewhere.
+You'll probably want to turn off the audio in your browser, otherwise you'll probably hear things from SuperDirt and WebDirt. Note: don't hit Estuary's WebDirt mute button if you want to hear something as it currently mutes both WebDirt and this link to SuperDirt.
+ 
