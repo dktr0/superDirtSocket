@@ -54,14 +54,19 @@ wss.on('connection',function(ws) {
   console.log("new WebSocket connection "); //  + ip);
   ws.on("message",function(m) {
     var n = JSON.parse(m);
-    console.log(n);
+    // console.log(n);
     var args = [
-      { type: "s", value: "cps" } , { type: "f", value: 1 },
-      { type: "s", value: "delta" } , { type: "f", value: 1 }, // ???
-      { type: "s", value: "cycle" } , { type: "f", value: 1 }, // ???
+//      { type: "s", value: "cps" } , { type: "f", value: 1 },
+//      { type: "s", value: "delta" } , { type: "f", value: 1 }, // ???
+//      { type: "s", value: "cycle" } , { type: "f", value: 1 }, // ???
       { type: "s", value: "s" } , { type: "s", value: n.sample_name }
     ];
-    udp.send( { address: "/play2", args: args },dirtAddress,dirtPort);
+    var bundle = {
+      timeTag: { native: n.when * 1000 + 300 },
+      packets: [ { address: "/play2", args: args }]
+    };
+    console.log(bundle);
+    udp.send(bundle,dirtAddress,dirtPort);
   });
 });
 
