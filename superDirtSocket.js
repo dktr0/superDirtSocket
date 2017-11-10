@@ -46,6 +46,13 @@ if(udpPort==null) udpPort = 7773;
 var udp = new osc.UDPPort( { localAddress: "127.0.0.1", localPort: udpPort });
 udp.open();
 
+function appendSuperDirtArg(superDirtArgName,oscType,sourceValue,targetArray) {
+  if(sourceValue != null) {
+    targetArray.push({ type: "s", value: superDirtArgName});
+    targetArray.push({ type: oscType, value: sourceValue });
+  }
+}
+
 // create WebSocket server (*** note: for security we should add a default so only local connections are accepted...)
 var server = http.createServer();
 var wss = new WebSocket.Server({server: server});
@@ -54,13 +61,34 @@ wss.on('connection',function(ws) {
   console.log("new WebSocket connection "); //  + ip);
   ws.on("message",function(m) {
     var n = JSON.parse(m);
-    // console.log(n);
-    var args = [
-//      { type: "s", value: "cps" } , { type: "f", value: 1 },
-//      { type: "s", value: "delta" } , { type: "f", value: 1 }, // ???
-//      { type: "s", value: "cycle" } , { type: "f", value: 1 }, // ???
-      { type: "s", value: "s" } , { type: "s", value: n.sample_name }
-    ];
+    console.log(n);
+    var args = [];
+    appendSuperDirtArg("s","s",n.sample_name,args);
+    appendSuperDirtArg("n","i",n.sample_n,args);
+    appendSuperDirtArg("speed","f",n.speed,args);
+    appendSuperDirtArg("begin","f",n.begin,args);
+    appendSuperDirtArg("end","f",n.end,args);
+    appendSuperDirtArg("length","f",n.f,args);
+    appendSuperDirtArg("accelerate","i",n.accelerate,args);
+    appendSuperDirtArg("cps","f",n.cps,args);
+    appendSuperDirtArg("unit","i",n.unit,args);
+    appendSuperDirtArg("loop","i",n.loop,args);
+    appendSuperDirtArg("delta","f",n.delta,args);
+    appendSuperDirtArg("legato","f",n.legato,args);
+    appendSuperDirtArg("sustain","f",n.sustain,args);
+    appendSuperDirtArg("amp","f",n.amp,args);
+    appendSuperDirtArg("gain","f",n.gain,args);
+    appendSuperDirtArg("pan","f",n.pan,args);
+    appendSuperDirtArg("note","f",n.note,args);
+    appendSuperDirtArg("freq","f",n.freq,args);
+    appendSuperDirtArg("midinote","f",n.midinote,args);
+    appendSuperDirtArg("octave","f",n.octave,args);
+    appendSuperDirtArg("latency","f",n.latency,args);
+    appendSuperDirtArg("lag","f",n.lag,args);
+    appendSuperDirtArg("offset","f",n.offset,args);
+    appendSuperDirtArg("cut","i",n.cut,args);
+    appendSuperDirtArg("orbit","i",n.orbit,args);
+    appendSuperDirtArg("cycle","i",n.cycle,args);
     var bundle = {
       timeTag: { native: n.when * 1000 + 300 },
       packets: [ { address: "/play2", args: args }]
