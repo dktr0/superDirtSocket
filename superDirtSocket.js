@@ -66,6 +66,8 @@ wss.on('connection',function(ws) {
     appendSuperDirtArg("s","s",n.sample_name,args);
     appendSuperDirtArg("n","i",n.sample_n,args);
     appendSuperDirtArg("speed","f",n.speed,args);
+    appendSuperDirtArg("note","f",n.note,args);
+    appendSuperDirtArg("shape","f",n.shape,args);
     appendSuperDirtArg("begin","f",n.begin,args);
     appendSuperDirtArg("end","f",n.end,args);
     appendSuperDirtArg("length","f",n.f,args);
