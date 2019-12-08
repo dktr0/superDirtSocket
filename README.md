@@ -7,7 +7,7 @@ Tiny thing to listen on a WebSocket and forward OSC-over-UDP events to SuperDirt
 1. Clone it somewhere useful (just one-time):
 ```
 cd ~
-git clone https://github.com/d0kt0r0/superDirtSocket.git
+git clone https://github.com/dktr0/superDirtSocket.git
 ```
 
 2. Install node.js, SuperCollider and SuperDirt (just one-time)
