@@ -66,10 +66,10 @@ function appendSuperDirtArg(superDirtArgName,oscType,sourceValue,targetArray) {
 }
 
 function sendSuperDirtBundle(n) {
-  if(n.sample_name == null || n.sample_name == "") return;
+  if(n.s == null || n.s == "") return;
   var args = [];
-  appendSuperDirtArg("s","s",n.sample_name,args);
-  appendSuperDirtArg("n","i",n.sample_n,args);
+  appendSuperDirtArg("s","s",n.s,args);
+  appendSuperDirtArg("n","i",n.n,args);
   appendSuperDirtArg("speed","f",n.speed,args);
   appendSuperDirtArg("note","f",n.note,args);
   appendSuperDirtArg("shape","f",n.shape,args);
